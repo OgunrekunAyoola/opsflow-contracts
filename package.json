@@ -1,0 +1,35 @@
+{
+  "name": "@opsflow/contracts",
+  "version": "0.1.0",
+  "description": "OpsFlow shared contracts — AgentContract, AgentResult envelope, AgentState, tool contracts, event payloads, shared enums. The typed boundary every OpsFlow repo depends on.",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.2.3",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.10",
+    "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opsflow/opsflow-contracts.git"
+  }
+}
