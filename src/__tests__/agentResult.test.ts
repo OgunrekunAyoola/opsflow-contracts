@@ -53,8 +53,13 @@ describe('packageResult (validate_and_package helper)', () => {
 
   test('duration never goes negative on clock skew', () => {
     const r = packageResult({
-      agent: 'memory', agentVersion: '0.1.0', status: 'ok', output: {},
-      correlationId: 'c', startedAt: 100, finishedAt: 50,
+      agent: 'memory',
+      agentVersion: '0.1.0',
+      status: 'ok',
+      output: {},
+      correlationId: 'c',
+      startedAt: 100,
+      finishedAt: 50,
     });
     expect(r.timing.durationMs).toBe(0);
   });

@@ -25,7 +25,9 @@ export class EnvelopeVersionError extends Error {
     public readonly received: string,
     public readonly supported: string,
   ) {
-    super(`Incompatible AgentResult envelopeVersion "${received}" — this orchestrator supports "${supported}" (same major, minor ≤ current).`);
+    super(
+      `Incompatible AgentResult envelopeVersion "${received}" — this orchestrator supports "${supported}" (same major, minor ≤ current).`,
+    );
     this.name = 'EnvelopeVersionError';
   }
 }

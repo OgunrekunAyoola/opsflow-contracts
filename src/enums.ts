@@ -16,8 +16,15 @@ export type Tier = z.infer<typeof TierEnum>;
 
 // Ticket lifecycle status (ingestion + resolution)
 export const TICKET_STATUSES = [
-  'new', 'triaging', 'triaged', 'awaiting_reply', 'replied',
-  'waiting_on_customer', 'auto_resolved', 'resolved', 'closed',
+  'new',
+  'triaging',
+  'triaged',
+  'awaiting_reply',
+  'replied',
+  'waiting_on_customer',
+  'auto_resolved',
+  'resolved',
+  'closed',
 ] as const;
 export const TicketStatusEnum = z.enum(TICKET_STATUSES);
 export type TicketStatus = z.infer<typeof TicketStatusEnum>;
@@ -74,14 +81,23 @@ export type Language = z.infer<typeof LanguageEnum>;
 
 // Thread state machine (ADR-059/060/061)
 export const THREAD_STATES = [
-  'idle', 'active', 'pending_customer', 'pending_vendor', 'pending_human', 'resolved',
+  'idle',
+  'active',
+  'pending_customer',
+  'pending_vendor',
+  'pending_human',
+  'resolved',
 ] as const;
 export const ThreadStateEnum = z.enum(THREAD_STATES);
 export type ThreadState = z.infer<typeof ThreadStateEnum>;
 
 // Message classification (thread classifier)
 export const MESSAGE_CLASSIFICATIONS = [
-  'continuation', 'new_ticket', 'reopen', 'topic_switch', 'human_queue_addition',
+  'continuation',
+  'new_ticket',
+  'reopen',
+  'topic_switch',
+  'human_queue_addition',
 ] as const;
 export const MessageClassificationEnum = z.enum(MESSAGE_CLASSIFICATIONS);
 export type MessageClassification = z.infer<typeof MessageClassificationEnum>;

@@ -1,0 +1,29 @@
+# Publishes @opsflow/contracts to GitHub Packages on a GitHub Release (semver tag).
+# Consumers (platform, domain-support, …) install the versioned package from there
+# in CI; local dev resolves it to the live source via the opsflow-devspace workspace.
+name: Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+          scope: '@opsflow'
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

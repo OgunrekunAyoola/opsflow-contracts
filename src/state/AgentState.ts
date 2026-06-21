@@ -128,7 +128,14 @@ export const AgentErrorSchema = z.object({
 });
 
 export const PaymentContextSchema = z.object({
-  type: z.enum(['none', 'billing_inquiry', 'payment_claim', 'billing_dispute', 'refund_request', 'payment_failure']),
+  type: z.enum([
+    'none',
+    'billing_inquiry',
+    'payment_claim',
+    'billing_dispute',
+    'refund_request',
+    'payment_failure',
+  ]),
   requiresHuman: z.boolean(),
   confidence: z.number(),
   extractedAmount: z.string().optional(),

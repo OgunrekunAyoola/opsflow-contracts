@@ -25,7 +25,12 @@ export interface TicketEscalatedPayload {
   ticketId: string;
   handoffId: string;
   tenantId: string;
-  reason: 'distressed_customer' | 'negative_high_priority' | 'tool_failure_3x' | 'payment_required' | 'manual';
+  reason:
+    | 'distressed_customer'
+    | 'negative_high_priority'
+    | 'tool_failure_3x'
+    | 'payment_required'
+    | 'manual';
   urgency: 'emergency' | 'high' | 'medium' | 'low';
   customerId: string;
   channel: string;

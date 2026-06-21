@@ -18,7 +18,8 @@ describe('AgentState schema (translated, enum-backed)', () => {
   test('rejects an out-of-vocabulary channel', () => {
     expect(() =>
       AgentStateSchema.parse({
-        ticketId: 't1', tenantId: 'tn1',
+        ticketId: 't1',
+        tenantId: 'tn1',
         ticket: { subject: 's', body: 'b', channel: 'carrier_pigeon', customerId: 'c1' },
         tenantConfig: {},
       }),
@@ -26,7 +27,11 @@ describe('AgentState schema (translated, enum-backed)', () => {
   });
 
   test('triage priority + request scope are backed by the shared enums', () => {
-    const out = TriageOutputSchema.parse({ category: 'shipping', sentiment: 'neutral', priority: 'emergency' });
+    const out = TriageOutputSchema.parse({
+      category: 'shipping',
+      sentiment: 'neutral',
+      priority: 'emergency',
+    });
     expect(TRIAGE_PRIORITIES).toContain(out.priority);
     expect(out.requestScope).toBe('unsure'); // default
     expect(REQUEST_SCOPES).toContain(out.requestScope);
