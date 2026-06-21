@@ -20,3 +20,4 @@ export * from './events/names';
 export * from './events/payloads';
 export * from './events/envelope';
 export * from './version/boundary';
+export * from './rbac/permissions';
