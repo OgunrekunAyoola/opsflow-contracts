@@ -60,6 +60,7 @@ export const PERMISSION_CATALOG: ReadonlyArray<{ resource: Resource; action: Act
     { resource: 'ai', action: 'halt', description: 'Halt/resume the AI pipeline (kill switch)' },
     { resource: 'approval', action: 'decide', description: 'Approve/reject paused agent actions (HITL)' },
     { resource: 'agent', action: 'execute', description: 'Trigger an agent run' },
+    { resource: 'tenant', action: 'manage', description: 'Manage tenant/organization config + onboarding' },
   ];
 
 /**
