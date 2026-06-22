@@ -15,6 +15,7 @@ export * from './enums';
 export * from './state/AgentState';
 export * from './agent/AgentContract';
 export * from './agent/AgentResult';
+export * from './agent/contracts/resolution';
 export * from './tools/contracts';
 export * from './events/names';
 export * from './events/payloads';

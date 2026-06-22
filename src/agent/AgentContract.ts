@@ -1,4 +1,5 @@
 import type { ZodTypeAny } from 'zod';
+import type { ValidationCheck } from './AgentResult';
 
 /**
  * AgentContract (AGENT_CONTRACT_SPEC §2) — the per-agent contract validated at the
@@ -31,4 +32,29 @@ export interface AgentContract<I extends ZodTypeAny = ZodTypeAny, O extends ZodT
   emits?: string[];
   /** Execution budget hint for the orchestrator (ms). */
   timeoutMs?: number;
+}
+
+/**
+ * Self-validation (AGENT_CONTRACT_SPEC §3) — an agent validates its own output against the
+ * contract's output schema before packaging the AgentResult. Deterministic-primary: a schema
+ * failure means the agent must NOT report `ok`. Returns checks for the envelope's `validation`.
+ */
+export function selfValidate<O extends ZodTypeAny>(
+  contract: AgentContract<ZodTypeAny, O>,
+  output: unknown,
+): { selfValidated: boolean; checks: ValidationCheck[] } {
+  const res = contract.output.safeParse(output);
+  if (res.success) {
+    return { selfValidated: true, checks: [{ name: 'output_schema', passed: true }] };
+  }
+  return {
+    selfValidated: false,
+    checks: [
+      {
+        name: 'output_schema',
+        passed: false,
+        detail: res.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; '),
+      },
+    ],
+  };
 }
