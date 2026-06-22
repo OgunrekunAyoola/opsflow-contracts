@@ -18,6 +18,7 @@ export * from './agent/AgentResult';
 export * from './agent/contracts/resolution';
 export * from './agent/contracts/response';
 export * from './agent/contracts/memory';
+export * from './agent/contracts/triage';
 export * from './tools/contracts';
 export * from './events/names';
 export * from './events/payloads';
