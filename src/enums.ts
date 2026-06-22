@@ -69,6 +69,15 @@ export const ROLES = ['admin', 'support_agent'] as const;
 export const RoleEnum = z.enum(ROLES);
 export type Role = z.infer<typeof RoleEnum>;
 
+// HITL approval lifecycle (G2)
+export const APPROVAL_STATUSES = ['pending', 'approved', 'rejected', 'expired'] as const;
+export const ApprovalStatusEnum = z.enum(APPROVAL_STATUSES);
+export type ApprovalStatus = z.infer<typeof ApprovalStatusEnum>;
+
+export const APPROVAL_TYPES = ['outbound_response'] as const;
+export const ApprovalTypeEnum = z.enum(APPROVAL_TYPES);
+export type ApprovalType = z.infer<typeof ApprovalTypeEnum>;
+
 // Sentiment
 export const SENTIMENTS = ['positive', 'neutral', 'negative', 'very_negative'] as const;
 export const SentimentEnum = z.enum(SENTIMENTS);
