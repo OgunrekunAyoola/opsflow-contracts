@@ -52,8 +52,9 @@ export const resolutionContract: AgentContract<typeof ResolutionInputSchema, typ
       'check_inventory',
       'update_delivery_address',
       'add_order_note',
-      // Conversion (CONVERSION_CAPABILITY_DESIGN) — capture an unpaid order + generate a pay link.
-      'create_order',
+      // Conversion (CONVERSION_CAPABILITY_DESIGN). create_order is humanOnly for now (HITL —
+      // AUTONOMY_AND_HITL_REGISTER 2026-06-23), so it's excluded here like refund_order; re-add to
+      // graduate it to autonomous. payment_link stays (generates a link only, never confirms payment).
       'payment_link',
     ],
     secrets: ['agent:resolution:llm'],
