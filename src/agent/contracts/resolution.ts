@@ -52,6 +52,8 @@ export const resolutionContract: AgentContract<typeof ResolutionInputSchema, typ
       'check_inventory',
       'update_delivery_address',
       'add_order_note',
+      // Conversion (CONVERSION_CAPABILITY_DESIGN) — capture an unpaid order; payment_link reserved.
+      'create_order',
     ],
     secrets: ['agent:resolution:llm'],
     emits: [],
