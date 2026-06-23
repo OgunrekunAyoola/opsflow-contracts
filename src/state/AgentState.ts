@@ -48,6 +48,10 @@ export const TenantConfigSchema = z.object({
   maxToolAttempts: z.number().default(3),
   brandVoicePrompt: z.string().optional(),
   prohibitedTopics: z.array(z.string()).default([]),
+  // Send-line autonomy (AUTONOMY_AND_HITL_REGISTER) — the VENDOR chooses: 'supervised' = a human
+  // reviews every reply (gate forced to human_review); 'autonomous' = quality-gated auto-send.
+  // Default 'supervised' — a tenant opts into autonomous explicitly (asked at onboarding).
+  autonomyMode: z.enum(['supervised', 'autonomous']).default('supervised'),
   rateLimits: z
     .object({
       ticketsPerMinute: z.number().default(60),
