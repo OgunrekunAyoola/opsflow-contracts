@@ -117,18 +117,20 @@ export const RequestScopeEnum = z.enum(REQUEST_SCOPES);
 export type RequestScope = z.infer<typeof RequestScopeEnum>;
 
 // Commerce intent (VENDOR_SUPPORT_DOMAIN_CAPABILITY_MAP) — the customer's job-to-be-done, which
-// lets the pipeline route to convert vs. resolve vs. recover. Orthogonal to the support `category`
-// (which says "what topic"); this says "what stage of the buying relationship". Domain-leaning but
-// generic enough to live in the shared vocabulary; the detailed guidance is domain-owned.
+// lets the pipeline route to convert vs. resolve vs. recover. ORTHOGONAL to two other axes, by
+// design: `category` says "what topic", `requestScope` (in/out/unsure) says "is this ours", and
+// this says "what stage of the buying relationship". An out-of-scope-but-real product question is
+// `discovery` + scope `out` — NOT `noise` (which is reserved for genuine junk), so we can still
+// decline-and-redirect a real customer instead of treating them as spam.
 export const COMMERCE_INTENTS = [
-  'discovery', // pre-purchase: availability, price, specs, "do you have X"
+  'discovery', // pre-purchase: availability, price, specs, "do you have X" (even if scope=out)
   'purchase', // intent to buy / order / pay-now
   'payment', // a payment/refund matter (money — fail-closed downstream)
   'fulfillment', // post-purchase: order status, delivery, address change
   'problem', // service recovery: broken/wrong item, returns, complaints
   'relationship', // greetings, hours/location, thanks, reviews
   'compliance', // opt-out, data requests
-  'noise', // spam, out-of-scope, unintelligible
+  'noise', // genuine junk ONLY: spam, gibberish, not a real request (NOT out-of-scope → that's scope=out)
 ] as const;
 export const CommerceIntentEnum = z.enum(COMMERCE_INTENTS);
 export type CommerceIntent = z.infer<typeof CommerceIntentEnum>;
