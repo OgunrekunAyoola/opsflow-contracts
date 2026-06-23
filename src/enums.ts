@@ -115,3 +115,20 @@ export type MessageClassification = z.infer<typeof MessageClassificationEnum>;
 export const REQUEST_SCOPES = ['in', 'out', 'unsure'] as const;
 export const RequestScopeEnum = z.enum(REQUEST_SCOPES);
 export type RequestScope = z.infer<typeof RequestScopeEnum>;
+
+// Commerce intent (VENDOR_SUPPORT_DOMAIN_CAPABILITY_MAP) — the customer's job-to-be-done, which
+// lets the pipeline route to convert vs. resolve vs. recover. Orthogonal to the support `category`
+// (which says "what topic"); this says "what stage of the buying relationship". Domain-leaning but
+// generic enough to live in the shared vocabulary; the detailed guidance is domain-owned.
+export const COMMERCE_INTENTS = [
+  'discovery', // pre-purchase: availability, price, specs, "do you have X"
+  'purchase', // intent to buy / order / pay-now
+  'payment', // a payment/refund matter (money — fail-closed downstream)
+  'fulfillment', // post-purchase: order status, delivery, address change
+  'problem', // service recovery: broken/wrong item, returns, complaints
+  'relationship', // greetings, hours/location, thanks, reviews
+  'compliance', // opt-out, data requests
+  'noise', // spam, out-of-scope, unintelligible
+] as const;
+export const CommerceIntentEnum = z.enum(COMMERCE_INTENTS);
+export type CommerceIntent = z.infer<typeof CommerceIntentEnum>;

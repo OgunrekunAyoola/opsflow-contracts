@@ -4,6 +4,7 @@ import {
   SentimentEnum,
   TriagePriorityEnum,
   RequestScopeEnum,
+  CommerceIntentEnum,
   RoutingDecisionEnum,
   QualityGateEnum,
   ThreadStateEnum,
@@ -64,6 +65,10 @@ export const TriageOutputSchema = z.object({
   isOptOut: z.boolean().default(false),
   productIntent: z.boolean().default(false),
   requestScope: RequestScopeEnum.default('unsure'),
+  // Commerce intent (VENDOR_SUPPORT_DOMAIN_CAPABILITY_MAP) — the customer's stage in the buying
+  // relationship, orthogonal to `category`. Lets the pipeline route to convert/resolve/recover.
+  // Defaulted (non-breaking): pre-commerce-taxonomy callers + the LLM-failure safe-default get 'noise'.
+  commerceIntent: CommerceIntentEnum.default('noise'),
   productSearchTerms: z.array(z.string()).default([]),
   confidence: z.number().optional(),
   reasoning: z.string().optional(),
