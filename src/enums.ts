@@ -62,7 +62,7 @@ export type QualityGate = z.infer<typeof QualityGateEnum>;
 // Routing decision (the orchestrator's authoritative next-path).
 // `inform` = the INFORM flow: answer a relationship/overview question (greetings, "what do you
 // sell?", hours) from the business overview, then run the quality gate (EXECUTION_PIPELINE_ROUTING_DESIGN).
-export const ROUTING_DECISIONS = ['automate', 'escalate', 'human', 'decline', 'inform'] as const;
+export const ROUTING_DECISIONS = ['automate', 'escalate', 'human', 'decline', 'inform', 'open_job'] as const;
 export const RoutingDecisionEnum = z.enum(ROUTING_DECISIONS);
 export type RoutingDecision = z.infer<typeof RoutingDecisionEnum>;
 
