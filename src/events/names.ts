@@ -3,7 +3,6 @@ export const DOMAIN_EVENT_NAMES = [
   'TicketCreated',
   'TicketResolved',
   'TicketEscalated',
-  'PaymentConfirmed',
   'CustomerOptedOut',
   'DistressDetected',
   'BudgetExceeded',

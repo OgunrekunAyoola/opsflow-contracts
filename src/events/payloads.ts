@@ -39,15 +39,6 @@ export interface TicketEscalatedPayload {
   score: number;
 }
 
-export interface PaymentConfirmedPayload {
-  ticketId: string;
-  tenantId: string;
-  orderId: string;
-  reference: string;
-  gateway: 'paystack' | 'flutterwave';
-  amountKobo?: number;
-}
-
 export interface CustomerOptedOutPayload {
   tenantId: string;
   canonicalId: string;
@@ -107,7 +98,6 @@ export interface DomainEventPayloads extends Record<DomainEventName, unknown> {
   TicketCreated: TicketCreatedPayload;
   TicketResolved: TicketResolvedPayload;
   TicketEscalated: TicketEscalatedPayload;
-  PaymentConfirmed: PaymentConfirmedPayload;
   CustomerOptedOut: CustomerOptedOutPayload;
   DistressDetected: DistressDetectedPayload;
   BudgetExceeded: BudgetExceededPayload;
