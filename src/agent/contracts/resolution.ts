@@ -41,22 +41,10 @@ export const resolutionContract: AgentContract<typeof ResolutionInputSchema, typ
     envelopeVersion: ENVELOPE_VERSION,
     input: ResolutionInputSchema,
     output: ResolutionOutputSchema,
-    // Mirrors the runtime tool scope for ResolutionAgentNode (AGENT_CONTRACTS).
-    allowedTools: [
-      'kb_lookup',
-      'escalate_ticket',
-      'check_order_status',
-      'reset_password',
-      'get_customer_orders',
-      'product_lookup',
-      'check_inventory',
-      'update_delivery_address',
-      'add_order_note',
-      // Conversion (CONVERSION_CAPABILITY_DESIGN). create_order is humanOnly for now (HITL —
-      // AUTONOMY_AND_HITL_REGISTER 2026-06-23), so it's excluded here like refund_order; re-add to
-      // graduate it to autonomous. payment_link stays (generates a link only, never confirms payment).
-      'payment_link',
-    ],
+    // Communication-only scope (PRODUCT_SCOPE_AND_MONEY_CLEANUP): NO money/order capability. The bot
+    // grounds + escalates; it never reads/writes orders or touches payment. The order + money tools
+    // were removed — the rail is enforced by ABSENCE (the only hard guarantee, CONSEQUENCE_TIERED_AUTHORING).
+    allowedTools: ['kb_lookup', 'escalate_ticket', 'reset_password', 'product_lookup', 'check_inventory'],
     secrets: ['agent:resolution:llm'],
     emits: [],
     timeoutMs: 60_000,
