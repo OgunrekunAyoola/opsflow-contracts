@@ -9,10 +9,19 @@ import { z } from 'zod';
  * those belong to `platform`; this file owns only the vocabulary.
  */
 
-// Subscription tier (the list only; per-tier caps live in platform's tier config)
-export const TIER_IDS = ['starter', 'growth', 'enterprise'] as const;
+// Subscription tier (the list only; per-tier caps live in platform's tier config).
+// `scale` re-added 2026-07-12: the 2026-06-13 drop was conditioned on real
+// cost-per-conversation data, which landed 2026-07-08 (PRICING_STRATEGY v2 §9/§11
+// defines Scale from it) — and the marketing/plan ladders already sell the tier.
+export const TIER_IDS = ['starter', 'growth', 'scale', 'enterprise'] as const;
 export const TierEnum = z.enum(TIER_IDS);
 export type Tier = z.infer<typeof TierEnum>;
+
+// Tenant subscription lifecycle (SAAS_BLUEPRINT C2/C7 — SB-4). Observe-only until
+// payments exist: the field is stamped correctly from day one, nothing enforces it.
+export const TENANT_STATUSES = ['trialing', 'active', 'past_due', 'paused', 'canceled'] as const;
+export const TenantStatusEnum = z.enum(TENANT_STATUSES);
+export type TenantStatus = z.infer<typeof TenantStatusEnum>;
 
 // Ticket lifecycle status (ingestion + resolution)
 export const TICKET_STATUSES = [
